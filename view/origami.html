@@ -1,0 +1,121 @@
+	<navbar></navbar>
+		<div class="row">
+            
+            <div class=" orig col-xl-8 col-lg-8 col-md-8 col-sm-10 text-center">
+                
+                
+                <h1 id="titlu"> {{origg.origamititle}} </h1>
+
+                <img src="/{{origg.origamipath}}" class="img-fluid origami" alt="origami">
+				<div class="descriere">
+                {{origg.origamidescription}}
+                </div>
+                <img src="/view/icons/hr2.png" id="hr">
+
+				<div style="float: left">
+                <button type="button" ng-click="like(origg._id)" class="buton">
+ 					<img src="/view/icons/like.png" class="like"><span>{{origg.likes.length}}</span>
+				</button>
+                
+                <button type="button" class="buton" ng-click="dislike(origg._id)">
+ 					<img src="/view/icons/dislike.png" class="like"><span>{{origg.dislikes.length}}</span>
+				</button></div>
+                <div style="float: left" id="comment"><a href="#aici"><button type="button" ng-show="username"  style="
+    /*right: 0;
+    left:  0;
+    bottom: 0;
+    right: 0!important;*/
+    float:  right;
+    /*position: sticky;*/
+    z-index: 3000;
+    /* top: 0; */
+    width: 10vw;
+    font-size: 1vw;
+"> Adauga un origami</button></a></div>
+                <div class="despre">
+                            <div class="gravatar ">   <a class="gra" ui-sref='profile({username:origg.userId.username })'>    <img class="rounded-circle gra" src="/{{origg.userId.profilepath}}" alt="gravatar"/></a> </div>
+                            <div class="text" style="width: 87%; text-align: left; padding-left: 4%; ">
+                              <h4> <span  ng-repeat="tag in origg.tags " class="badge badge-dark tag">{{tag}}</span></h4></h4>
+                            </div>
+                </div>
+                
+                
+                
+                <div class="comment" id="aici">
+                	<form ng-submit="sendcomment()">
+                     	
+                     		<label for="title">Titlu:&nbsp;</label>
+                        	<input type="text" name="title"  ng-model="upld.title" required/>
+                        	<br/>
+                     		<label for="name">Continut:</label>
+                            <textarea name="continut" id="continut" rows="10" ng-model="upld.content"  cols="100"></textarea>
+                        	<br/> 
+                       		     
+      					
+                        	<button type="submit" class="btn btn-primary">Posteaza</button>
+                    </form>
+                </div>
+            
+                <div class="comentarii" ng-repeat="comm in origg.commentaArray">
+                	<div class="profil"> <a class="gra" ui-sref='profile({username:comm.userId.username })'>   <img class=" rounded-circle gra" ng-src="/{{comm.userId.profilepath}}"/></a> </div>
+                    <div class="titlucomentariu">
+                    	{{comm.title}}
+                    </div>
+                    <div class="comentariu">{{comm.comment}}</div>
+                </div>
+        </div>
+                    </div>
+            <div class="col-3">
+
+            </div>
+
+        
+        <button type="button"  class="btn btn-primary" data-toggle="modal" 
+ data-target="#origami"  style="
+    right: 0;
+    left:  0;
+    bottom: 0;
+    right: 0!important;
+    float:  right;
+    position: sticky;
+    z-index: 3000;
+    /* top: 0; */
+    width: 15vw;
+    font-size: 1.4vw;
+"> Adauga un origami</button>
+
+<div class="modal fade" id="origami" tabindex="-1" role="dialog" 
+aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Posteaza un origami:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form ng-submit="submit()">
+      <div class="modal-body">
+        
+        
+      
+ <label for="origamititle">Titlu:</label>
+    <input type="text" name="origamititle" id="origamititle" ng-model="upload.origamititle" required/>
+    <br/>
+ <label for="name">Descriere:</label>
+    <input type="text" name="origamidescription" id="origamidescription" 
+ng-model="upload.origamidescription" required/>
+    <br/>
+ <label for="tag">Taguri:</label>
+    <input type="text" name="tag" id="tag" ng-model="tag" required/> <button value="none" 
+type="button" ng-click="uploadTag()">Adauga tag</button>
+    <br/> <span class="badge badge-dark" ng-click="removeItem($index)" ng-repeat="tag in upload.tags"> 
+{{tag}} </span>
+   <br> <label for="file">Incarca poza:</label>
+    <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" 
+required/>
+    <br/>
+  
+        
+        
+      </div>

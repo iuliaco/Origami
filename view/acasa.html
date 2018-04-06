@@ -1,0 +1,83 @@
+<navbar></navbar>
+
+ <div class="row" ng-repeat="orig in origami">
+   <div class=" orig col-xl-8 col-lg-8 col-md-8 col-sm-10 text-center">
+        <a class="gra" ui-sref='origami({origami:orig._id })' >  <h1 class="titlu">   {{orig.origamititle}} </h1></a>
+       <img ng-src="/{{orig.origamipath}}"  class="img-fluid origami"> 
+	<!-- <iframe ng-src=" https://storage.googleapis.com/vrview/index.html?image=http://iulia.rms-it.ro:8080/{{orig.origamipath}} | trusted"></iframe> -->
+
+<img src="/view/icons/hr2.png" id="hr">  
+ <button type="button" class="buton" id="likes{{orig._id}}"  ng-click="like(orig._id)">
+ 					<img ng-src="/view/icons/like.png" class="like"><span>{{orig.likes.length}}</span>
+				</button>
+                
+                <button type="button" class="buton"  ng-click="dislike(orig._id)">
+ 					<img ng-src="/view/icons/dislike.png" class="like"><span>{{orig.dislikes.length}}</span>
+				</button>
+
+<div class="despre">
+         
+            
+               <div class="gravatar">    <a class="gra" ui-sref='profile({username:orig.userId.username })'>   <img class=" img-fluid rounded-circle gra" src="/{{orig.userId.profilepath}}" /></a>  </div>
+            
+               <div class="text"  style="width: 87%; text-align: left; padding-left: 4%;">
+                  <h4>
+                  <span  ng-repeat="tag in orig.tags " class="badge badge-dark tag">{{tag}}</span></h4>
+               </div>
+            
+         
+      </div>
+   </div>
+</div> 
+<button type="button" ng-show="username"  class="btn btn-primary" data-toggle="modal" data-target="#origami"  style="
+    right: 0;
+    left:  0;
+    bottom: 0;
+    right: 0!important;
+    float:  right;
+    position: sticky;
+    z-index: 3000;
+    /* top: 0; */
+"> Adauga un origami</button>
+
+<div class="modal fade" id="origami" tabindex="-1" role="dialog" 
+aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Poza de profil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     </div>
+        <form ng-submit="submit()">
+      <div class="modal-body">
+        
+        
+      
+ <label for="origamititle">Posteaza un origami:</label>
+    <input type="text" name="origamititle" id="origamititle" ng-model="upload.origamititle" required/>
+    <br/>
+ <label for="name">Descriere:</label>
+    <input type="text" name="origamidescription" id="origamidescription" 
+ng-model="upload.origamidescription" required/>
+    <br/>
+ <label for="tag">Taguri:</label>
+    <input type="text" name="tag" id="tag" ng-model="tag" required/> <button value="none" 
+type="button" ng-click="uploadTag()">Adauga tag</button>
+    <br/> <span class="badge badge-dark" ng-click="removeItem($index)" ng-repeat="tag in upload.tags"> 
+{{tag}} </span>
+   <br> <label for="file">Incarca poza:</label>
+    <input type="file" name="file" id="file" ng-model="upload.file" ngf-select ngf-max-size="25MB" 
+required/>
+    <br/>
+  
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="submit" class="btn btn-primary">Posteaza</button>
+      </div> </form>
+    </div>
+  </div> </div>

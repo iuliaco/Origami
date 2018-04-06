@@ -1,0 +1,16 @@
+angular.module('ori').controller('userController', ['$scope', '$http','userService', '$window', function($scope, $http, $window, userService ) {
+ $scope.person = "mara";
+    $scope.authenticate = function(){
+userService.authenticate($scope.user)
+		.then(function (response) {
+                    if (response.success) {
+                        console.log('Registration successful', true);
+                        $location.path('/login');
+                    } else {
+                        console.log(response.message);
+
+                    }
+                });}	
+
+
+  }])

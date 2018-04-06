@@ -1,0 +1,45 @@
+<navbar></navbar>
+<div  class="container text-center fundal">
+  <h1>{{profile.username}}</h1> <img class="img-fluid mx-auto" ng-src="/{{profile.profilepath}}" 
+style="width:15em ;margin-top:1em;"/> </div> <div class="container 
+fundal">
+  <p>Nume:{{profile.name}}</p> <p>Prenume: {{profile.surname}}</p> <p ng-show="profile.gender" >Sex:Feminin </p>
+ <p ng-hide="profile.gender" >Sex:Masculin </p>
+ <p>Si-a creat 
+contul pe: {{profile.registerdata | date}} </p> <p> Data nasterii: {{profile.birthdate | date}}</p> </div> 
+
+<div class="container text-center ">
+<button type="button" ng-show="profile.username==username "  class="btn btn-primary text-center " data-toggle="modal" data-target="#Profil">
+  Adauga o noua poza de profil </button></div>
+ <!-- Modal -->
+ <div class="modal fade" id="Profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Poza de profil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form ng-submit="submit()">
+      <div class="modal-body">
+        
+        
+      
+    <legend>Pune-ti poza de profil aici:</legend>
+    <input type="file" class="form-control-file" name="file" id="file" ng-model="upload.file" 
+ngf-select ngf-max-size="25MB" required/>
+    <br/>
+  
+  
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Inchide</button>
+        <button type="submit" class="btn btn-primary">Salveaza</button>
+      </div> </form>
+    </div>
+  </div>
+</div>
+

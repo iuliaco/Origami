@@ -1,0 +1,46 @@
+<div class="row">
+<div class="col-2"></div>
+<div class="col fundal">
+
+<form name="form" class="formular"  ng-submit="authenticate()">
+  <div class="container">
+    <div class="form-group">
+      <label for="email1">Email address</label>
+      <input type="email" class="form-control" ng-model="user.email"  id="exampleInputEmail1" 
+aria-describedby="emailHelp"  placeholder="Enter email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputUsername">Username</label>
+      <input type="text" class="form-control" name="username"  ng-model="user.username" id="exampleInputUsername" 
+aria-describedby="userHelp" placeholder="Enter user">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputNume">Nume</label>
+      <input type="text" class="form-control" name="name"  id="exampleInputNume" 
+aria-describedby="numeHelp" placeholder="Enter name"  ng-model="user.name">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPrenume">Prenume</label>
+      <input type="text" class="form-control" name="surname" id="exampleInputPrenume" 
+aria-describedby="emailHelp" placeholder="Enter email"  ng-model="user.surname">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" name="password"  class="form-control" 
+id="exampleInputPassword1" placeholder="Password"  ng-model="user.password">
+    </div>
+    <div>
+   <p>Sexul: <span class="radioValue">{{ user.gender }}</span> </p>
+    <md-radio-group  name="sex"  ng-model="user.gender">
+      <md-radio-button value="0" class ="md-primary">Masculin</md-radio-button>
+      <md-radio-button value="1"> Feminin </md-radio-button>
+    </md-radio-group> </div>
+    <p>Data nasterii:
+      <md-datepicker ng-model="user.birthdate" name="date" md-current-view="year" md-placeholder="Enter date" onkeydown="return false"></md-datepicker>
+    </p>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+</div>
+ <div class="col-4"></div>
+</div>
