@@ -1,1 +1,1 @@
-angular.module('ori', ['ui.router', 'ui.bootstrap', 'ngMaterial','ngCookies','ngFileUpload']);
+angular.module('ori', ['ui.router', 'ui.bootstrap', 'ngMaterial','ngCookies',"ngMessages",'ngFileUpload']);

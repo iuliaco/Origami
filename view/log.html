@@ -5,20 +5,35 @@
  <form name="form" class="formular"  ng-submit="login()" > 
  <div class="container">
   <div class="form-group">
+	<div class="alert alert-danger" ng-show="eroare"  role="alert">
+  {{eroare}}
+</div>
  
-    <label for="exampleInputEmail1">Email address/username </label>
+    <label for="exampleInputEmail1">Adresa de email/Numele de utilizator   
+ <div ng-messages="form.email.$error" role="alert" ng-show="form.email.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti un nume de utilizator/o adresa de email</span></span>     </div>
+<div ng-message="minlength"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Numele de utilizator are o lungime prea mica.</span></span>     </div>
+
+</div> </label >
     <input type="text" class="form-control" id="exampleInputEmail1" 
-aria-describedby="emailHelp" ng-model="user.logemail"  placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share 
-your email with anyone else.</small>
+aria-describedby="emailHelp" ng-model="user.logemail" name="email" ng-minlength="6" required   placeholder="Email/Nume de utilizator">
+    
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
+    <label for="exampleInputPassword1">Parola
+<div ng-messages="form.password.$error" role="alert"  ng-show="form.password.$dirty" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext"> Trebuie sa introduceti parola.</span></span>     </div>
+<div ng-message="minlength"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Parola trebuie sa fie de minim 6 caractere.</span></span>     </div>
+
+
+</div> </label >
+
+
     <input type="password" class="form-control" 
-id="exampleInputPassword1" ng-model="user.logpassword"  placeholder="Password">
+id="exampleInputPassword1" ng-model="user.logpassword" ng-minlength="6"  name="password"  placeholder="Parola" required>
 </div>
   <div class="form-check">
   </div>
-  <button type="submit" class="btn btn-primary"> Submit </button> </div> </form>
+  <button type="submit" ng-disabled="form.$invalid"  class="btn btn-primary"> Submit </button> </div> </form>
  </div> <div class="col-3"></div>
 </div>

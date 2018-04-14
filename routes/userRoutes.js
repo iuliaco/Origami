@@ -1,4 +1,5 @@
 
+
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user.js');
@@ -38,7 +39,9 @@ if (req.body.email &&
     req.body.password &&
     req.body.name &&
     req.body.surname &&
-    req.body.gender ) {
+    req.body.gender &&
+	req.body.birthdate
+) {
 
     var userData = {
       email: req.body.email,
@@ -52,7 +55,8 @@ if (req.body.email &&
 
     User.create(userData, function (error, user) {
       if (error) {
-        return next(error);
+        error.message="Numele de utilizator/parola/emailul au fost folosite deja";
+        return res.status(500).send(error);
       } else {
   req.session.username = user.username;
       req.session.userid=user._id;
@@ -67,9 +71,10 @@ return res.send(user.username);
     });
 
   }  else {
-    var err = new Error('All fields required.');
+    var err = new Error('Toate campurile sunt obligatorii.');
     err.status = 400;
-    return next(err);
+    err.message="Toate campurile sunt obligatorii.";
+     res.status(401).send('Toate campurile sunt obligatorii.');
   }
 });
 router.route('/users/:user_username') 
@@ -96,6 +101,7 @@ router.route('/login')
  
         var err =  new Error('No user atm.');
 	err.status=401;
+	err.message="No user atm.";
             return next(err);
     
 }
@@ -109,9 +115,7 @@ router.route('/login')
 if(req.body.logemail && req.body.logpassword) {
     User.authenticate(req.body.logemail, req.body.logpassword, function (error, user) {
       if (error || !user) {
- var err = new Error('Wrong email or password');
-        err.status = 401;
-        return next(err);
+        res.status(401).send('Emailul/numele de utilizator si/sau parola nu sunt corecte.');
       } else {
         req.session.username = user.username;
       req.session.userid=user._id; 
@@ -124,9 +128,10 @@ return res.send(user.username);
 }
     });
   } else {
-    var err = new Error('All fields required.');
+    var err = new Error('Toate campurile sunt obligatorii.');
     err.status = 400;
-    return next(err);
+    err.mesage="Toate campurile sunt obligatorii.";
+    res.status(401).send('Toate campurile sunt obligatorii.');
   }})
 
 
@@ -135,17 +140,19 @@ return res.send(user.username);
 
                 var err = new Error('No user atm.');
                 err.status = 401;
+		err.message="No user atm.";
                 return next(err);
 
             } else {
  console.log(req.body);
   console.log(req.file);
-var bitmap = fs.readFileSync('uploads/' + req.file.filename).toString('hex', 0, 4)
+ var bitmap = fs.readFileSync('uploads/' + req.file.filename).toString('hex', 0, 4)
 console.log(bitmap);
 		if (!checkMagicNumbers(bitmap)) {
 			fs.unlinkSync('uploads/' + req.file.filename);
 			 var err = new Error('Not a picture');
         err.status = 401;
+	err.message="Nu este o imagine.";
         return next(err);
 
 		}else{
@@ -157,6 +164,7 @@ console.log(bitmap);
       } else if (!user) {
         var err = new Error('User not found.');
         err.status = 401;
+	err.message="Userul nu a fost gasit.";
         return callback(err);
       } else{	if(user.profilepath){fs.unlinkSync(user.profilepath);}   }})
 
@@ -165,8 +173,14 @@ console.log(bitmap);
     if (err) return res.send(500, { error: err });
     return res.send("succesfully saved");
 })
-}  }});
+}  }})
+        .delete((req,res) => {
+          req.session.destroy();
+          res.status(200).send();
+          })
 
+
+        ;
 
 
 

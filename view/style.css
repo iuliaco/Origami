@@ -3,7 +3,7 @@ html,body {
   -moz-background-size: cover;
   -webkit-background-size:cover;
   background-size: cover;
- background:  url("/view/photos/05.jpg") center center fixed;
+ background: url("/view/photos/05.jpg") center center fixed;
   margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -13,7 +13,8 @@ html,body {
 .jumbotron{
   background-color: rgba(233, 236, 239, 0.5);
   font-size: 1vw;
-		}
+  
+}
 .fundal {
 
    background-color: rgba(248, 249, 250, 0.75);
@@ -23,8 +24,8 @@ html,body {
     display: inline;
 }
 .formular{
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
  .gravatar {
             padding: 0;
@@ -39,7 +40,7 @@ html,body {
         }
         .orig {
             background-color: rgba(233, 236, 239, 0.5);
-            margin-top: 1em;
+            margin-top: .5vw;
             padding: 0;
 			margin:10%;
 			width: 90%;
@@ -85,7 +86,7 @@ nav {
 	text-shadow: rgba(66,66,66,1.00) 5px 4px 2px;	
 	margin-bottom: 2%;
 	color: #fff;
-	font-size: 4vw;
+	font-size: 2vw !important;
 }
 
 #site {
@@ -94,14 +95,16 @@ nav {
 }
 
 #poza {
+	display:flex;
+	align-content:center;
+	justify-content:center;
 	width: 60%;
-	margin: 0;
+	margin:0;
 	background-color: rgba(52,58,64,1.00);
 }
 
 #date {
 	margin-bottom: 0;
-	font-size: 2vw;	
 }
 
 .info {
@@ -177,11 +180,67 @@ nav {
 	#hide {
 		visibility:hidden ;	
 	}
+	.col {
+		flex-basis: auto !important;	
+	}
+	#titlumodal {
+	font-size: 4vw;	
+}
+
+	#navigare {
+		font-size: 2vw !important;	
+}
+	
+	#site {
+		font-size: 10vw;
+}
+	
+	#date {
+		font-size: 3vw;		
+}
+	
+	#titlu {
+		font-size: 6vw;	
+}
+	
+	#legendamodal {
+		font-size: 3vw;	
+}
+	
+	.btnmodal {
+		font-size: 2vw !important;	
+}
+
+	.modal-footer {
+		height: 4vh !important;	
+}
+	
+	.modal-body {
+		height: 15vh !important;	
+}
+	
+	.modal-header {
+		height: 4vh !important;	
+}
+
+	.buton {
+		font-size: 3vw !important;		
+}
+	#stanga {
+		width: 100%;
+		text-align: center;	
+	}
+	#dreapta {
+		width: 100%;	
+	}
 }
 
 @media (min-width:822px) {
 	#arata {
 		visibility: hidden;	
+	}
+	#titlu {
+		font-size: 4vw;	
 	}
 }
 
@@ -222,8 +281,8 @@ nav {
 }
 
 .alerta {
-	width: 1vw;
-	height: 1vw;
+	width: 2vh;
+	height: 2vh;
 	
 	/*display: none;	*/
 }
@@ -244,7 +303,7 @@ nav {
     padding: 0.2vw 0;
     position: absolute;
     z-index: 1;
-    top: -5px;
+    top: -0.4vw;
     left: 190%;
 }
 
@@ -253,8 +312,8 @@ nav {
     position: absolute;
     top: 50%;
     right: 100%;
-    margin-top: -5px;
-    border-width: 5px;
+    margin-top: -0.4vw;
+    border-width: .4vw;
     border-style: solid;
     border-color: transparent black transparent transparent;
 }
@@ -353,4 +412,51 @@ nav {
 	margin: 1vw 10% 0 10%;
 	text-align: center;
 	font-style:italic;
+}
+
+.buton {
+	width: 80%;
+	height: 70%;
+	background-color: rgba(52,58,64,1.00) !important;
+	border: 0 !important;
+}
+
+.butonlike {
+	height: 70%;
+	border: 0 !important;
+	float: left;
+	background-color: transparent;
+}
+
+.butonlike span {
+	font-size: 2vw;	
+}
+
+#tagcloud {
+	width: 50vw;
+	height: 40vw;	
+	radius: 24vw;
+}
+
+#tagcloud a {
+	color: #D31F10;	
+}
+
+#festsm a{
+	color: #D31F10;
+}
+
+#glob {
+		display:flex;
+	align-content:center;
+	justify-content:center;	
+}
+
+
+.col-2 {
+	height: 1px;
+}
+
+#delog:hover {
+ cursor:pointer;
 }

@@ -48,7 +48,8 @@ router.route('/origami/:id')
 
                 var err = new Error('No user atm.');
                 err.status = 401;
-                return next(err);
+               err.message="No user atm.";
+		 return next(err);
 
 
             } else {
@@ -73,8 +74,10 @@ Origami.findOneAndUpdate({_id: req.params.id},{ $push: { commentaArray: comm}}, 
 
 
 }  else {
-                        var err = new Error('All fields required.');
+                        var err = new Error('Toate campurile sunt obligatorii.');
                         err.status = 400;
+			   err.message="Toate campurile sunt obligatorii.";
+
                         return next( err); }
 
 
@@ -93,6 +96,7 @@ router.route('/origami')
             if (req.session.username == "undefined") {
 
                 var err = new Error('No user atm.');
+		   err.message="No user atm.";
                 err.status = 401;
                 return next(err);
 
@@ -134,8 +138,10 @@ router.route('/origami')
                         });
 
                }     } else {
-                        var err = new Error('All fields required.');
+                        var err = new Error('Toate campurile sunt obligatorii.');
                         err.status = 400;
+			 err.message="Toate campurile sunt obligatorii.";
+
                         return next(err);
                     }
                } });
@@ -147,6 +153,8 @@ router.route('/like/:id')
 
                 var err = new Error('No user atm.');
                 err.status = 401;
+		err.message="No user atm.";
+
                 return next(err);
 
             } else {
@@ -205,7 +213,8 @@ router.route('/dislike/:id')
 
                 var err = new Error('No user atm.');
                 err.status = 401;
-                return next(err);
+                err.message="No user atm.";
+		return next(err);
 
             } else {
 console.log(req.params.id);

@@ -4,7 +4,8 @@ angular.module('ori').controller('origamiController', ['$rootScope', '$scope', '
  $scope.x=0;
 $scope.origami=[];
 $scope.upload.tags = [];
- angular.module('ori').filter('trusted', ['$sce', function ($sce) {
+$scope.origg={}; 
+angular.module('ori').filter('trusted', ['$sce', function ($sce) {
     return function (url) {
         return $sce.trustAsResourceUrl(url);
     };
@@ -35,8 +36,11 @@ origamiService.getOrigami()
 if($stateParams.origami){
 origamiService.getOneOrigami($stateParams.origami)
                  .then(function successCallback(res) {
+	    $scope.origg={};
             $scope.origg = res.data;
-            console.log($scope.origg);
+            $scope.origg.likes= $scope.origg.likes.length;
+	    $scope.origg.dislikes= $scope.origg.dislikes.length;
+	    console.log($scope.origg);
             console.log(res);
         },
         function errorCallback(res) {
@@ -58,6 +62,7 @@ console.log($scope);
       }).then(function (response) {
 	console.log("yeaaa boyyyyyyy");
         console.log(response.data);
+	$("#origami").modal('hide');
 	$scope.tag="";
         $scope.upload = {};
       })
@@ -67,12 +72,14 @@ console.log($scope);
 $scope.sendcomment = function(){
 origamiService.postCommentOrigami($stateParams.origami,$scope.upld)
                  .then(function successCallback(res) {
-            $scope.origg = res.data;
-            console.log($scope.origg);
-            console.log(res);
+	    $scope.origg = res.data;
+	    console.log($scope.origg);
+      $state.reload();
+console.log(res);
         },
         function errorCallback(res) {
             console.log('Error: ' + res.data);
+	 $state.go('account.login');
         });
 }
  $scope.removeItem = function(index){
@@ -117,6 +124,7 @@ socketService.emit('addunlike', {data: data,user:$rootScope.username});
 
         function errorCallback(res) {
             console.log('Error: ' + res.data);
+		$state.go('account.login');
         });
 
 
@@ -157,6 +165,7 @@ socketService.emit('addundislike', {data: data,user:$rootScope.username});
 
         function errorCallback(res) {
             console.log('Error: ' + res.data);
+		 $state.go('account.login');
         });
 
 
@@ -167,7 +176,7 @@ console.log(data);
                 if($scope.origami[i]._id==data.data){
                         console.log("am gasti elementul "+i);
  $scope.origami[i].likes.push(data.username);
-
+ $scope.origg.likes++;
 $scope.$applyAsync();
         console.log("Buna lumeee");
     }
@@ -181,8 +190,9 @@ console.log(data);
                 if($scope.origami[i]._id==data.data){
                         console.log("am gasti elementul "+i);
  var index = $scope.origami[i].likes.indexOf(data.username);
- $scope.origami[i].likes.splice(index, 1);
-
+	console.log( $scope.origg.likes); 
+$scope.origami[i].likes.splice(index, 1);
+ $scope.origg.likes--;
 $scope.$applyAsync();
     }  
 
@@ -194,7 +204,7 @@ console.log(data);
                 if($scope.origami[i]._id==data.data){
                         console.log("am gasti elementul "+i);
  $scope.origami[i].dislikes.push(data.username);
-
+  $scope.origg.dislikes++;
 $scope.$applyAsync();
         console.log("Buna lumeee");
     }
@@ -210,7 +220,7 @@ console.log(data);
                         console.log("am gasti elementul "+i);
  var index = $scope.origami[i].dislikes.indexOf(data.username);
  $scope.origami[i].dislikes.splice(index, 1);
-
+  $scope.origg.dislikes--;
 $scope.$applyAsync();
     }  
 

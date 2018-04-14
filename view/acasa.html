@@ -3,22 +3,26 @@
  <div class="row" ng-repeat="orig in origami">
    <div class=" orig col-xl-8 col-lg-8 col-md-8 col-sm-10 text-center">
         <a class="gra" ui-sref='origami({origami:orig._id })' >  <h1 class="titlu">   {{orig.origamititle}} </h1></a>
-       <img ng-src="/{{orig.origamipath}}"  class="img-fluid origami"> 
-	<!-- <iframe ng-src=" https://storage.googleapis.com/vrview/index.html?image=http://iulia.rms-it.ro:8080/{{orig.origamipath}} | trusted"></iframe> -->
+       <img ng-src="/{{orig.origamipath}}"   class="img-fluid origami"/> 
+
 
 <img src="/view/icons/hr2.png" id="hr">  
- <button type="button" class="buton" id="likes{{orig._id}}"  ng-click="like(orig._id)">
+ <button type="button" class="butonlike" id="likes{{orig._id}}"  ng-click="like(orig._id)">
  					<img ng-src="/view/icons/like.png" class="like"><span>{{orig.likes.length}}</span>
 				</button>
                 
-                <button type="button" class="buton"  ng-click="dislike(orig._id)">
+                <button type="button" class="butonlike"  ng-click="dislike(orig._id)">
  					<img ng-src="/view/icons/dislike.png" class="like"><span>{{orig.dislikes.length}}</span>
 				</button>
 
 <div class="despre">
          
             
-               <div class="gravatar">    <a class="gra" ui-sref='profile({username:orig.userId.username })'>   <img class=" img-fluid rounded-circle gra" src="/{{orig.userId.profilepath}}" /></a>  </div>
+               <div class="gravatar">    <a class="gra" ui-sref='profile({username:orig.userId.username })'>  
+ <img class=" img-fluid rounded-circle gra" src="/{{orig.userId.profilepath}}" ng-show="orig.userId.profilepath" />
+ <img class=" img-fluid rounded-circle gra" ng-hide="orig.userId.profilepath"  src="/view/photos/defaultavatar.png" />
+
+</a>  </div>
             
                <div class="text"  style="width: 87%; text-align: left; padding-left: 4%;">
                   <h4>
@@ -55,7 +59,7 @@ aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         
         
       
- <label for="origamititle">Posteaza un origami:</label>
+ <label for="origamititle">Titlul origamiului:</label>
     <input type="text" name="origamititle" id="origamititle" ng-model="upload.origamititle" required/>
     <br/>
  <label for="name">Descriere:</label>

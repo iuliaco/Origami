@@ -10,23 +10,19 @@ aria-label="Toggle navigation">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" ui-sref='acasa'>Acasa <span 
-class="sr-only">(current)</span></a>
+        <a class="nav-link" ui-sref='acasa'>Acasa </a>
       </li>
       <li class="nav-item" ng-hide="username">
-        <a class="nav-link" ui-sref='account.login'>Log in or 
-Register</a>
+        <a class="nav-link" ui-sref='account.login'>Inregistrare/Autentificare</a>
       </li>
        <li class="nav-item" ng-show="username">
-        <a class="nav-link" ui-sref='profile({username: username})'>Profile</a>
+        <a class="nav-link" ui-sref='profile({username: username})'>Profil</a>
       </li>
-     
+            <li class="nav-item" ng-show="username">
+        <a id="delog" class="nav-link" ng-click="deletelogin()" >Delogare</a>
+      </li>
+
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" 
-placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" 
-type="submit">Search</button>
-    </form>
+ 
   </div> </nav>
 </div>

@@ -1,6 +1,11 @@
 angular.module('ori').controller('userController', ['$rootScope', '$scope', '$http', '$window','$state','$stateParams','Upload','userService' , function($rootScope,$scope, $http, $window,$state,$stateParams,Upload , userService ) {
  $scope.person = "mara";
  $scope.user = {};
+ $scope.eroare="";
+ $scope.eroare2="";
+
+$scope.maxDate = new Date('1/1/2012');
+console.log($scope.maxDate);
  userService.getUsername()
         .then(function successCallback(res) {
             $rootScope.username= res.data;
@@ -31,7 +36,7 @@ userService.getProfile($stateParams.username)
     $scope.authenticate = function(){
 	console.log('am ajuns pana aici')
 userService.authenticate($scope.user)
-		.then(function (response) {
+		.then(function successCallback(response) {
                     if (response.status==200) {
                         console.log('Registration successful', true);
        
@@ -43,19 +48,19 @@ userService.authenticate($scope.user)
                         console.log($stateParams);
 
 
-                 $state.go('profile({username:$scope.user.logemail})')
-
-
-                    } else {
-                        console.log(response.message);
-
+                 $state.go('profile({username:$scope.user.logemail})');
+} },
+   
+			function errorCallback(response)  {
+                        console.log(response);
+				$scope.eroare2="Numele de utilizator/parola/emailul au fost folosite deja";
                     }
-                });};
+                );};
 
   $scope.login = function(){
         console.log('am ajuns pana aici')
 		userService.login($scope.user)
-                .then(function (response) {
+                .then(function successCallback(response) {
                     if (response.status==200) {
                         console.log('Login successful');
 			console.log(response);
@@ -64,23 +69,37 @@ userService.authenticate($scope.user)
 			$state.go('profile' , {username:$rootScope.username});
 			console.log($stateParams);
 
-                    } else {
-                        console.log(response.message);
+                    }},
+			function errorCallback(response) {
+                        console.log(response.data);
 			console.log(response);
+			$scope.eroare=response.data;
                     }
-                });};
+                );};
+
+
+  $scope.deletelogin = function(){
+userService.deleteUser()
+ .then(function successCallback(res) {
+ $state.go('contacts');
+        },
+        function errorCallback(res) {
+            console.log('Error: ' + res.data);
+        });};
 
 
 
  $scope.submit = function(){
       $scope.submit = function(){
+		console.log("ma trimit wait a lil");
       Upload.upload({
         url: '/api/login',
         method: 'put',
         data: $scope.upload
       }).then(function (response) {
         console.log(response.data);
-        $scope.upload.push(response.data);
+$("#Profil").modal('hide');      
+  $scope.upload.pull(response.data);
         $scope.upload = {};
       })
   }};

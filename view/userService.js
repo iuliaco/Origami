@@ -33,7 +33,13 @@ configObject={
 }
       return $http(configObject);
  },
-
+deleteUser:function(){
+configObject={
+      method: 'DELETE',
+      url: '/api/login'
+     }
+      return $http(configObject);
+ }
 
 
 } }]);

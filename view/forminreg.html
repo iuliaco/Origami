@@ -5,42 +5,79 @@
 <form name="form" class="formular"  ng-submit="authenticate()">
   <div class="container">
     <div class="form-group">
-      <label for="email1">Email address</label>
-      <input type="email" class="form-control" ng-model="user.email"  id="exampleInputEmail1" 
-aria-describedby="emailHelp"  placeholder="Enter email">
+<div class="alert alert-danger" ng-show="eroare2"  role="alert">
+  {{eroare2}}
+</div>
+
+      <label for="email1">Adresa de email
+ <div ng-messages="form.email.$error" role="alert" ng-show="form.email.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti o adresa de email.</span></span> </div>
+<div ng-message="email"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Introduceti o adresa de email valida.</span></span>     </div>
+
+</div> </label>
+      <input type="email" class="form-control" name="email"  ng-model="user.email"  ng-minlength="6" required  id="exampleInputEmail1" 
+aria-describedby="emailHelp"  placeholder="Introduceti emailul">
     </div>
     <div class="form-group">
-      <label for="exampleInputUsername">Username</label>
-      <input type="text" class="form-control" name="username"  ng-model="user.username" id="exampleInputUsername" 
-aria-describedby="userHelp" placeholder="Enter user">
+      <label for="exampleInputUsername">Nume de utilizator
+ <div ng-messages="form.username.$error" role="alert" ng-show="form.username.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti un nume de utilizator.</span></span> </div>
+<div ng-message="minlength"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Numele de utilizator are o lungime prea mica.</span></span>     </div>
+
+</div> </label>
+      <input type="text" class="form-control" name="username"  ng-model="user.username" id="exampleInputUsername"  ng-minlength="6" required 
+aria-describedby="userHelp" placeholder="Introduceti numele de utilizator">
     </div>
     <div class="form-group">
-      <label for="exampleInputNume">Nume</label>
-      <input type="text" class="form-control" name="name"  id="exampleInputNume" 
-aria-describedby="numeHelp" placeholder="Enter name"  ng-model="user.name">
+      <label for="exampleInputNume">Numele de familie
+ <div ng-messages="form.name.$error" role="alert" ng-show="form.name.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti un numele de familie.</span></span>  </div>
+<div ng-message="minlength"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Numele de familie are o lungime prea mica.</span></span>     </div>
+
+</div> </label>
+      <input type="text" class="form-control" name="name"  id="exampleInputNume"  ng-minlength="3" required
+aria-describedby="numeHelp" placeholder="Introduceti numele"  ng-model="user.name">
     </div>
     <div class="form-group">
-      <label for="exampleInputPrenume">Prenume</label>
-      <input type="text" class="form-control" name="surname" id="exampleInputPrenume" 
-aria-describedby="emailHelp" placeholder="Enter email"  ng-model="user.surname">
+      <label for="exampleInputPrenume">Prenume
+ <div ng-messages="form.surname.$error" role="alert" ng-show="form.surname.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti un prenume.</span></span>  </div>
+<div ng-message="minlength"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Prenumele are o lungime prea mica.</span></span>     </div>
+
+</div> </label>
+      <input type="text" class="form-control" name="surname" id="exampleInputPrenume"  ng-minlength="3" required
+aria-describedby="emailHelp" placeholder="Introduceti prenumele"  ng-model="user.surname">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" name="password"  class="form-control" 
-id="exampleInputPassword1" placeholder="Password"  ng-model="user.password">
+      <label for="exampleInputPassword1">Parola
+ <div ng-messages="form.password.$error" role="alert" ng-show="form.password.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti o parola.</span></span>  </div>
+<div ng-message="minlength"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Parola are o lungime prea mica.</span></span>     </div>
+
+</div> </label>
+      <input type="password" name="password"  class="form-control"   ng-minlength="6" required
+id="exampleInputPassword1" placeholder="Introduceti parola"  ng-model="user.password">
     </div>
     <div>
-   <p>Sexul: <span class="radioValue">{{ user.gender }}</span> </p>
-    <md-radio-group  name="sex"  ng-model="user.gender">
+   <p>Sexul:  <div ng-messages="form.sex.$error" role="alert" ng-show="form.sex.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti sexul.</span></span>  </div>
+
+</div> </p>
+    <md-radio-group  name="sex"  ng-model="user.gender" reqired>
       <md-radio-button value="0" class ="md-primary">Masculin</md-radio-button>
       <md-radio-button value="1"> Feminin </md-radio-button>
     </md-radio-group> </div>
-    <p>Data nasterii:
-      <md-datepicker ng-model="user.birthdate" name="date" md-current-view="year" md-placeholder="Enter date" onkeydown="return false"></md-datepicker>
+    <p>Data nasterii:  <div ng-messages="form.date.$error" role="alert" ng-show="form.date.$touched" >
+<div ng-message="required"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa introduceti data nasterii.</span></span></div>
+<div ng-message="max"> <span class="tooltip1"><img src="view/icons/alerta.png" class="alerta"><span class="tooltiptext">Trebuie sa ai cel putin 6 ani pentru a folosi acest site.</span></span></div>
+
+</div>
+      <md-datepicker ng-model="user.birthdate" md-max-date="maxDate" name="date" md-current-view="year" max="2012-01-01"  md-placeholder="Enter date"  required onkeydown="return false"></md-datepicker>
     </p>
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
 </div>
- <div class="col-4"></div>
-</div>
+ <div class="col-4"></div> </div> 
+
+

@@ -1,8 +1,0 @@
-app.service('userService', userService);
-userService.$inject = ['$http'];
-function userService() {
-  this.authenticate = authenticate;
-  function authenticate(){
-    
-  }
-}
