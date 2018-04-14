@@ -17,7 +17,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 app.use(jsonParser);
 app.use(urlencodedParser);
 app.use(session({
-  secret: 'ioolia',
+  secret: '',
   resave: false,
   saveUninitialized: false,
   rolling:true,
