@@ -4,16 +4,16 @@ Un site care are rolul de a uni oamenii pasionati de origami, care isi pot posta
 # Tehnologii
 O aplicatie web care comunica printr-un RESTful api cu baza de date
 Tehnologii Backend:
--NodeJs
--Express
--Multer
--Bcrypt
--Mongoose(pentru baza de date MongoDB)
+- NodeJs
+- Express
+- Multer
+- Bcrypt
+- Mongoose(pentru baza de date MongoDB)
 
 Tehnologii Frontend:
--HTML
--CSS
--AngularJs
+- HTML
+- CSS
+- AngularJs
 
 # Cerinte sistem
 Se poate deschide in orice browser, preferabil google chrome
